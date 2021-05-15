@@ -1,5 +1,6 @@
 const mysql = require("mysql"); 
 const inquirer = require("inquirer");
+const { connect } = require("http2");
 require("console.table"); 
 
 
@@ -62,8 +63,6 @@ function firstPrompt() {
 
 
 //// Employee list 
-
-
 function seeEmployee() { 
   console.log("see Employee list\n"); 
 
@@ -76,7 +75,7 @@ function seeEmployee() {
     ON d. id = r.department_id
     LEFT JOIN employee m 
     ON m.id = e.manager_id`
-    
+
    connection.query(query, function (err, res) { 
        if(err) throw err;   
 
@@ -86,3 +85,70 @@ function seeEmployee() {
        firstPrompt(); 
    });
 }
+
+///View employees by there department
+
+function viewDepartmentEE() { 
+    consol.log("View Employees by Department\n");
+
+    var query = 
+    `Select d.id, d.name, r.salary AS budget 
+      FROM employee e
+      LEFT JOIN role r 
+      ON e.role_id = r.id
+    LEFT JOIN department d
+    ON d.id = r.department_id
+    GROUP BY d.id, d.name`
+
+    connection.query(query, function (err, res) { 
+        if (err) throw err; 
+
+        const departmentOptions = res.map(data => ({
+            value: data.id, name: data.name
+        })); 
+
+        console.table(res); 
+        console.log("Successfully viewed Department!!\n"); 
+
+        promptDepartment(departmentOptions);
+    }); 
+
+}
+
+function promptDepartment(departmentOptions) { 
+
+    inquirer 
+    .prompt([ 
+    {
+        type: "list", 
+        name : "departmentId",
+        message: "Choose a department",
+        choices: departmentOptions
+    }
+        
+    ])
+    .then(function(answer) { 
+        console.log("answer ", answer.departmentId); 
+
+        var query =  
+        `SELECT e.id, e.first_name, e.last_name, r.title, d.name  AS department
+        FROM employee e 
+        JOIN role r 
+        ON e.role_id = r.id
+        JOIN department d 
+        ON  d.id = r.department_id
+        WHERE d.id = ? `
+
+
+         connection.query(query, answer.departmentId, function( err, res) {
+           if(err) throw err; 
+
+           console.table("response ", res); 
+           console.log(res.affectedRows + "Successfully viewed Employees\n"); 
+
+           firstPrompt(); 
+       }); 
+    });
+}
+
+
