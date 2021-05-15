@@ -184,19 +184,38 @@ function  promptInsert(roleChoices) {
         {
             type: "input", 
         name : "first_name",
-        message: "Please input employees first name",
+        message: "Please input employee's first name",
 
-
-
-        type: "list", 
-        name : "departmentId",
-        message: "Choose a department",
+        type: "input", 
+        name : "Last_name",
+        message: "Please input employee's last name",
 
         type: "list", 
-        name : "departmentId",
-        message: "Choose a department",
-  
+        name : "roleId",
+        message: "Please input the employee's role",
+        choices: roleChoices
        
-        }
+        }, 
     ])
+    .then(function (answer) { 
+        console.log(answer); 
+
+        var query = `INSERT INTO employee SET?`
+        connection.query(query, 
+    {   
+        first_name:answer.first_name, 
+        last_name: answer.last_name,
+        role_id: answer.roleId,
+        manager_id: answer.managerId,
+
+    }, 
+    function (err, res) { 
+        if(err) throw err
+        
+        console.table(res); 
+        console.log(res.insertedRows + "Insert succesfull!\n"); 
+
+        firstPrompt(); 
+    }); 
+    }); 
 }
