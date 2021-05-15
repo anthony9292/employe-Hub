@@ -57,5 +57,31 @@ function firstPrompt() {
                  addRole(); 
                  break;     
         }
-    }) 
+    });
+}
+
+
+//// Employee list 
+
+
+function seeEmployee() { 
+  console.log("see Employee list\n"); 
+
+  var query =  
+  `SELECT e.id, e.first_name, e.last_name, r.title, d.name  AS department, r.salary, CONCAT(m.first_name, ' ',m.last_name) AS manager
+   FROM employee e
+   LEFT JOIN role r
+   ON e.role_id = r.id
+   ON d.id = r.department_id
+   LEFT JOIN employee m 
+   ON m.id = e.manager_id`
+
+   connection.query(quary, function (err, res) { 
+       if(err) throw err;   
+
+       console.table(res); 
+       console.log("Employee's list viewed!!\n")
+
+       firstPrompt(); 
+   });
 }
