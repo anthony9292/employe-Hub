@@ -24,8 +24,15 @@ function firstPrompt() {
      name: "task", 
      message: "Choose the Following Steps!", 
      choices: [ 
-         "View Employees", 
-         "View Employees by "
+         "See employee list", 
+         "View Employees by Department",
+         "Add a Employee",
+         "Remove a Employees",
+         "Update Role of Employee",
+         "Add a role to Employee",
+         //Removes and updates roles
+         "End"
      ]
     })
+    
 }
