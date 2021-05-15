@@ -267,7 +267,7 @@ function removeEmployee() {
 
  }
 
- ///update employee role section 
+ ///update employee role section and roleArray
 
  function updateRoleEE() {  
      employeeArray(); 
@@ -298,5 +298,65 @@ function employeeArray() {
         roleArray(employeeOptions);
        });
  }
+
+function roleArray(employeeOptions) {   
+    console.log("Updating role"); 
+
+    var query = 
+    `Select r.id, r.title, r.salary
+    FROM role r`
+    let roleOptions; 
+
+    connection.query(query, function (err, res) { 
+        if(err) throw err;  
+
+        roleOptions = res.map(({id, title, salary }) => ({ 
+            value: id, title: `${title}`, salary: `${salary}`
+    }));
+
+    console.table(res); 
+    console.log("roleArray to Update!\n")
+
+    promptEmployeeRole( employeeOptions, roleOptions); 
+
+}); 
+}
+
+function promptEmployeeRole(employeeOptions, roleOptions) { 
+
+    inquirer
+    .prompt([
+        {
+            type: "list", 
+            name: "employeeId",
+            message: "Please pick one employee update Role!",
+            choices: employeeOptions
+        }, 
+        {
+            type: "list", 
+            name: "roleId",
+            message: "Which role would you like to update?",
+            choices: roleOptions 
+        }, 
+    ])
+    .then(function (answer)  { 
+
+        var query = `UPDATE employee SET role_id = ? WHERE id = ?`
+        connection.query(query, 
+            [answer.roleId,
+              answer.employeeId
+            ],
+              
+            function (err, res) { 
+                if (err) throw err; 
+
+                console.table(res); 
+                console.log(res.affectedRows + "Update succesfull!!")
+            })
+
+            firstPrompt(); 
+    }); 
+}
+
 
 
