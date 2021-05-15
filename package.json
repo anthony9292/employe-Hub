@@ -1,0 +1,25 @@
+{
+  "name": "employe-hub",
+  "version": "1.0.0",
+  "description": "Employee Tracker Application ",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthony9292/employe-Hub.git"
+  },
+  "author": "Anthony Ndegwa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anthony9292/employe-Hub/issues"
+  },
+  "homepage": "https://github.com/anthony9292/employe-Hub#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.0.0",
+    "mysql": "^2.18.1"
+  }
+}
