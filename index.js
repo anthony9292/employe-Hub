@@ -32,7 +32,7 @@ function firstPrompt() {
          "Update Role of Employee",
          "Add a role to Employee",
          //Removes and updates roles
-         "End"
+         "Exit"
      ]
     })
 
@@ -160,7 +160,7 @@ function addEmployee() {
     console.log("Please insert a Employee!")
  
     var query = 
-    `SELECT r.id r.title, r.salary
+    `SELECT r.id, r.title, r.salary
       FROM role r` 
 
      connection.query(query, function (err, res) { 
@@ -177,7 +177,7 @@ function addEmployee() {
      }); 
 }  
 
-function  promptInsert(roleChoices) {   
+function promptInsert(roleChoices) {   
 
     inquirer
     .prompt([ 
@@ -203,14 +203,14 @@ function  promptInsert(roleChoices) {
         var query = `INSERT INTO employee SET?`
         connection.query(query, 
     {   
-        first_name:answer.first_name, 
+        first_name: answer.first_name, 
         last_name: answer.last_name,
         role_id: answer.roleId,
         manager_id: answer.managerId,
 
     }, 
     function (err, res) { 
-        if(err) throw err
+        if(err) throw err;
         
         console.table(res); 
         console.log(res.insertedRows + "Insert successfull!\n"); 
@@ -266,3 +266,37 @@ function removeEmployee() {
       }); 
 
  }
+
+ ///update employee role section 
+
+ function updateRoleEE() {  
+     employeeArray(); 
+ }
+
+function employeeArray() { 
+     console.log("UPDATE Employee"); 
+
+     var query = 
+     ` SELECT e.id, e.first_name, e.last_name, r.title. d.name AS department, r.salary, CONCAT(m.first_name,' ', m,last_name) As manager
+      From employee e
+      JOIN role r 
+       ON e.role_id = re.id
+       JOIN department d 
+       ON d.id = r.department_id 
+       JOIN employee m 
+       ON m.id = e.manager_id`
+
+       connection.query(query, function(err, res) { 
+           if(err) throw err;
+           
+           const employeeOptions = res.map(({id, first_name, last_name,}) => ({ 
+            value: id, name: `${id} ${first_name}  ${last_name}` 
+        })); 
+        console.table(res); 
+        console.log( "update employeeArray\n"); 
+
+        roleArray(employeeOptions);
+       });
+ }
+
+
