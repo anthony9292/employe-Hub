@@ -62,7 +62,7 @@ function firstPrompt() {
 }
 
 
-//// Employee list 
+//// Employee list  section 
 function seeEmployee() { 
   console.log("see Employee list\n"); 
 
@@ -86,7 +86,7 @@ function seeEmployee() {
    });
 }
 
-///View employees by there department
+///View employees by there department section 
 
 function viewDepartmentEE() { 
     console.log("View Employees by Department\n");
@@ -152,3 +152,51 @@ function promptDepartment(departmentOptions) {
 }
 
 
+
+////view employee/add employee section 
+
+
+function addEmployee() { 
+    console.log("Please insert a Employee!")
+ 
+    var query = 
+    `SELECT r.id r.title, r.salary
+      FROM role r` 
+
+     connection.query(query, function (err, res) { 
+         if(err) throw err; 
+
+         const roleChoices = res.map(({id, title, salary }) => ({ 
+             value: id, title: `${title}`, salary: `${salary}`
+         }));
+
+         console.table(res); 
+         console.log("InsertRole");
+
+         promptInsert(roleChoices); 
+     }); 
+}  
+
+function  promptInsert(roleChoices) {   
+
+    inquirer
+    .prompt([ 
+        {
+            type: "input", 
+        name : "first_name",
+        message: "Please input employees first name",
+
+
+
+        type: "list", 
+        name : "departmentId",
+        message: "Choose a department",
+
+        type: "list", 
+        name : "departmentId",
+        message: "Choose a department",
+  
+       
+        }
+    ])
+}
