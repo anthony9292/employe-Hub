@@ -13,7 +13,19 @@ var connection = mysql.createConnection({
 
 connection.connect(function (err) { 
     if (err) throw err; 
+   firstPrompt();
+});
 
- console.log(`connect as id ${connection.threadId}`); 
- connection.end(); 
-}); 
+function firstPrompt() { 
+
+    inquirer 
+    .prompt({ 
+     type: "list", 
+     name: "task", 
+     message: "Choose the Following Steps!", 
+     choices: [ 
+         "View Employees", 
+         "View Employees by "
+     ]
+    })
+}
