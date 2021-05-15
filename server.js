@@ -24,7 +24,7 @@ function firstPrompt() {
      name: "task", 
      message: "Choose the Following Steps!", 
      choices: [ 
-         "See employee list", 
+         "See Employee list", 
          "View Employees by Department",
          "Add a Employee",
          "Remove a Employees",
@@ -34,5 +34,28 @@ function firstPrompt() {
          "End"
      ]
     })
-    
+
+    .then (function({task}) { 
+        switch(task) { 
+            case "See Employee list":
+              seeEmployee(); 
+              break;
+              case "View Employees by Department": 
+               viewDepartmentEE(); 
+               break;
+
+               case "Add a Employee":
+                   addEmployee();
+                   break;
+               case "Remove a Employee":
+                   removeEmployee();
+                   break;
+                case "Update Role of Employee":
+                    updateRoleEE();
+                    break;
+                case "Add a Role": 
+                 addRole(); 
+                 break;     
+        }
+    }) 
 }
