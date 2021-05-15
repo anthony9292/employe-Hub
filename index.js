@@ -153,7 +153,7 @@ function promptDepartment(departmentOptions) {
 
 
 
-////view employee/add employee section 
+////view employee by manager/add employee section also create insert into 
 
 
 function addEmployee() { 
@@ -213,9 +213,31 @@ function  promptInsert(roleChoices) {
         if(err) throw err
         
         console.table(res); 
-        console.log(res.insertedRows + "Insert succesfull!\n"); 
+        console.log(res.insertedRows + "Insert successfull!\n"); 
 
         firstPrompt(); 
     }); 
     }); 
 }
+
+///Romove employee section plus employee array to delete 
+
+function removeEmployee() { 
+    console.log("Employee is deleted"); 
+
+    var query = 
+    `SELECT e.id, e.first_name, e.last_name 
+    FROM employee e` 
+
+    connection.query(query, function (err, res) { 
+     if(err) throw err; 
+
+     const deleteEmployeeOptions = res.map(({id, first_name, last_name,}) => ({ 
+         value: id, name: `${id} ${first_name}  ${last_name}` 
+     })); 
+     console.table(res); 
+     console.log("ArraytoDelete!\n"); 
+
+     promptDelete(deleteEmployeeOptions)
+    } )
+ }
