@@ -238,6 +238,31 @@ function removeEmployee() {
      console.table(res); 
      console.log("ArraytoDelete!\n"); 
 
-     promptDelete(deleteEmployeeOptions)
-    } )
+     promptDelete(deleteEmployeeOptions);
+    }); 
+ }
+
+ function promptDelete(deleteEmployeeOptions) {   
+       inquirer
+       .prompt([ 
+           { 
+
+        type: "list", 
+        name : "employeeId",
+        message: "Which employee do you want to remove?",
+        choices: deleteEmployeeOptions
+           }
+       ])
+      .then(function (answer)  {   
+      var query = `DELETE FROM employee`; 
+      connection.query(query, { id: answer.employeeId}, function (err, res) { 
+          if(err) throw err; 
+
+          console.table(res); 
+          console.log(res.affectedRows + "Deleted!\n"); 
+
+          firstPrompt(); 
+       }); 
+      }); 
+
  }
