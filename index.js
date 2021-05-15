@@ -89,7 +89,7 @@ function seeEmployee() {
 ///View employees by there department
 
 function viewDepartmentEE() { 
-    consol.log("View Employees by Department\n");
+    console.log("View Employees by Department\n");
 
     var query = 
     `Select d.id, d.name, r.salary AS budget 
