@@ -140,7 +140,7 @@ connection.connect((err) => {
                     },
                     { 
                     name: "choice",
-                    type: "manlist",
+                    type: "rawlist",
                     message: "employee's managers name?",
                     choices: selectManager()
                     }
@@ -166,16 +166,16 @@ connection.connect((err) => {
 
                       ///>>>>>>>>Update Employee>>>>>>>/////
 
-            function updateEmployee() { 
-               connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", function(err, res) {
-                if(err) throw err
-                console.log(res) 
-                inquirer.prompt([
+ function updateEmployee() { 
+       connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", function(err, res) {
+         if(err) throw err
+        console.log(res) 
+          inquirer.prompt([
                     { 
 
-                        name:"lastName",
-                        type: "manlist",
-                       choices: function() {
+             name:"lastName",
+                type: "rawlist",
+               choices: function() {
                            var lastName = [];
                            for (var i= 0; i < res.length; i++) {
                                lastName.push(res[i].last_name);
@@ -188,7 +188,7 @@ connection.connect((err) => {
                     }, 
 
                     { name:"role", 
-                      type: "manlist", 
+                      type: "rawlist", 
                       message:"Enter Employees new title" , 
                      choices: selectRole()
                     
@@ -196,7 +196,7 @@ connection.connect((err) => {
 
                     ]).then(function(val) {
                         var roleId = selectRole().indexOf(val.role) + 1 
-                        connection.query("UPDAATE employee SET WHERE ?" , 
+                        connection.query("UPDATE employee SET WHERE ?" , 
                          { 
                              last_name: val.lastName
                          },{
@@ -212,7 +212,28 @@ connection.connect((err) => {
                 });
 
             }
+                          ///>>>>>>>>Employee role section>>>>>>>/////
 
+
+
+function addRole() { 
+      connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role",   function(err, res) {
+        inquirer.prompt([ 
+
+            { 
+                 
+
+
+            },{
+
+
+
+            },
+           
+        ])
+          
+        
+})
 
                  
 
