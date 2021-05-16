@@ -67,73 +67,57 @@ connection.connect((err) => {
 
                 })
             }
-
-
-                               //adding staff section\\\\\\\\\\\
-
-   
-
-            let managerIndex = 0; 
-            for(i=0; i<stafflist.length; i++) { 
-                if ( result.manager === stafflist[0]) { 
-                    managerIndex = i;
-                }
-            }
-
-            let query = 'INSERT INTO employee SET ?';  
-            connection.query(query, 
-                { 
-                    first_name: result.first_name,
-                    last_name: result.last_name,
-                    rol_id: roleIndex,
-                    manager_id: managerIndex,
-                    manager: result.manager
-                },  
-                    (err, res) => { 
-                        if(err) throw err;
-                    }
-                ),
-                console.log(result.first_name,'',result.last_name,  'Your Inputs have been added to the list!'),
-                root()
-            }
-        ), 30}) 
-     }
-
-                       //adds department section\\\\
-
-   
-
-                 ///add role section\\\\\\\
-
-   
-                            //See all  Employees section///
-    function ExploreAll(){ 
+                              ///>>>>>>>View all Employees Section>>>>>>>/////
+   function viewAllEmployees() {
        connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employee INNER JOIN role on role.id = employee.role_id INNER JOIN department on department.id = role.department_id left join employee e on employee.manager_id = e.id;",
-          function(er,res) { 
-              if (err) throw err
-              console.table(res)
-              root()
+        function(err, res) { 
+            if(err, res ) throw err
+            console.table(res)
+            startPrompt()
+        })
+   }
+
+                                ///>>>>>>>View all Roles Section>>>>>>>/////
+
+      function ExpAllRoles() {
+           connection.query("SELECT employee.first_name, employee.last_name, role.title AS Title FROM employee JOIN role ON employee.role_id = role.id;", 
+             function(err, res) { 
+             if(err) throw err 
+            console.table(res)
+             startPrompt()
           })
-        }
-
-                       ////////update employees role  section///////////
-
-            
-  
-
-   function ExploreRoles () { 
-       connection.query("SELECT employee.first_name, employee.last_name, role.title AS Title FROM employee JOIN role ON employee.role_id = role.id;", 
-     function(err, res) { 
-         if(err) throw err 
-         console.table(res)
-         root()
-     })
     }
-   function ExploreDepartments  (){
-       connection.query("SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;", 
-      function (err, res) {  
-          if (err) throw err
-          console.table(res)
-          root()
-      })
-      
+
+                               
+                                ///>>>>>>>Explore all Departments Section>>>>>>>/////
+
+  function ExpAllDep() { 
+      connection.query("SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;",
+         function(err, res) {
+             if(err) throw err
+             console.table(res) 
+             startPrompt()
+         })
+  }
+
+
+
+                                      ///>>>>>>>>Manager role selection for add Employee prompt>>>>>>>/////
+
+        var managersArr = []; 
+        function selectManager() { 
+            connection.query("SELECT first_name, last_name FROM employee WHERE manager_id IS NULL", function(err, res) {
+                if(err) throw err 
+                for(var i = 0; i < res.length; i++) { 
+                    managersArr.push(res[i].first_name)
+
+                }
+            })
+            return managersArr;
+        }
+         
+                                  ///>>>>>>>>Add Employee Section>>>>>>>/////
+
+            function addEmployee() { 
+                inquirer.prompt
+            }
