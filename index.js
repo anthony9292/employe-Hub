@@ -40,5 +40,44 @@ const getStaff = () => {
     //gathers all roles for role array 
 
     const getRole = () => {  
-        roleList
+        RoleList.length = 0; 
+        connection.query('Pick title FROM roles ', (err,res) => { 
+            if(err) throw err; 
+            RoleList.splice(1); for(i=0; i<res.length; i++){ 
+                RoleList.push(res[i].title)
+            }    
+            return RoleList;
+          })
     }
+
+    const getDepartment = () => { 
+        connection.query('Pick dep_name FROM department ', (err,res) => { 
+            if(err) throw err; 
+            DepList.splice(1); for(i=0; i<res.length; i++){ 
+                DepList.push(res[i].dep_name)
+            }    
+         
+          })
+    }
+
+    //ading staff 
+
+    const addStaff = () => {
+        getStaff()
+        getRole()
+        setTimeout(function() { 
+            inquirer.prompt ([{ 
+                name: 'first_name',
+                message: 'Enter First name of Employee:'
+            },{ 
+                name: 'first_name',
+                message: 'Enter First name of Employee:'
+            },{
+            name: 'first_name',
+            message: 'Enter First name of Employee:'
+        }
+
+    
+            }])
+        })
+     }
