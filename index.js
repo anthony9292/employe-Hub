@@ -119,5 +119,50 @@ connection.connect((err) => {
                                   ///>>>>>>>>Add Employee Section>>>>>>>/////
 
             function addEmployee() { 
-                inquirer.prompt
+                inquirer.prompt([ 
+                    
+                    {  
+                        name: "firstname", 
+                        type: "input",
+                        message: "Enter employee's first name "
+                    }, 
+                    {  
+                        name: "lastname", 
+                        type: "input",
+                        message: "Enter employee's last name "
+                    }, 
+                    {
+                       name: "role",
+                       type:"list", 
+                       message:"Select employee's role",
+                       choices: selectRole()
+                    },
+                    { 
+                    name: "choice",
+                    type: "manlist",
+                    message: "employee's managers name?",
+                    choices: selectManager()
+                    }
+
+                ]).then(function (val) { 
+                    var roleId =selectRole().indexOf(val.role) + 1 
+                    var managerId = selectManager().indexOf(val.choice) + 1 
+                    connection.query("INSERT INTO employee SET ?" , 
+                 { 
+                     first_name: val.firstname,
+                     last_name: val.lastname,
+                     manager_id: managerId,
+                     role_id: roleId 
+
+                 }, function(err){ 
+                     if (err) throw err
+                     console.table(val)
+                     startPrompt()
+                 })
+                })
             }
+
+
+                      ///>>>>>>>>Update Employee>>>>>>>/////
+
+            
