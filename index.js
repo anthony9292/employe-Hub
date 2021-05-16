@@ -2,6 +2,7 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 const { inherits } = require("util");
 const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
+const { connect } = require("http2");
 require("console.table"); 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -119,4 +120,33 @@ const getStaff = () => {
         ), 30}) 
      }
 
-     
+    //adds department
+
+    const addDepartment = () => { 
+        inquirer.prompt ([ 
+            { 
+                new: 'New_Department', 
+                message: 'Enter name of your New department:'
+            }
+        ]).then((result) => { 
+
+            let query = 'INSERT INTO department SET ?'; 
+            connect.query(query, 
+                
+                { 
+ 
+                dep_name: result.new_Department
+            }, 
+             (err, res) => {
+                 if (err) throw err; 
+
+             }
+            ),
+            console.log('added Inputs Successfully', result.new_Department,"department"), 
+            root()
+        }
+        )
+    }
+
+    
+ 
