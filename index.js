@@ -1,5 +1,6 @@
 const mysql = require("mysql"); 
 const inquirer = require("inquirer");
+const { start } = require("repl");
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     //3306(standard),or personal port 
@@ -165,4 +166,55 @@ connection.connect((err) => {
 
                       ///>>>>>>>>Update Employee>>>>>>>/////
 
-            
+            function updateEmployee() { 
+               connection.query("SELECT employee.last_name, role.title FROM employee JOIN role ON employee.role_id = role.id;", function(err, res) {
+                if(err) throw err
+                console.log(res) 
+                inquirer.prompt([
+                    { 
+
+                        name:"lastName",
+                        type: "manlist",
+                       choices: function() {
+                           var lastName = [];
+                           for (var i= 0; i < res.length; i++) {
+                               lastName.push(res[i].last_name);
+
+                           }
+                           return lastName;
+                       },
+                       message: "Enter Employee's last name " ,
+
+                    }, 
+
+                    { name:"role", 
+                      type: "manlist", 
+                      message:"Enter Employees new title" , 
+                     choices: selectRole()
+                    
+                      }, 
+
+                    ]).then(function(val) {
+                        var roleId = selectRole().indexOf(val.role) + 1 
+                        connection.query("UPDAATE employee SET WHERE ?" , 
+                         { 
+                             last_name: val.lastName
+                         },{
+                         role_id:roleId
+                        },
+                         function(err){ 
+                             if(err) throw err
+                             console.table(val)
+                             startPrompt()
+                         }) 
+
+                    });
+                });
+
+            }
+
+
+                 
+
+                    
+                  
