@@ -1,6 +1,7 @@
 const mysql = require("mysql"); 
 const inquirer = require("inquirer");
 const { inherits } = require("util");
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 require("console.table"); 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -68,16 +69,54 @@ const getStaff = () => {
         setTimeout(function() { 
             inquirer.prompt ([{ 
                 name: 'first_name',
-                message: 'Enter First name of Employee:'
+                message: 'Enter First name of employee:'
             },{ 
-                name: 'first_name',
-                message: 'Enter First name of Employee:'
+                name: 'last_name',
+                message: 'Enter Last name of employee:'
             },{
-            name: 'first_name',
-            message: 'Enter First name of Employee:'
+            name: 'role',
+            message: 'Enter the role of the employee:',
+            type: 'list', 
+            choices: RoleList,
+        }, {
+            name: 'manager',
+            message: "Enter the employee's  manager",
+            choices: Stafflist,
+            type: 'list'
         }
+         ]).then((result) => { 
 
-    
-            }])
-        })
+            let roleIndex = 0; 
+            for(i=0; i<RoleList.length; i++) { 
+                if(RoleList[i] === result.role ) { 
+                    roleIndex = i+1;
+                }
+            }
+
+            let managerIndex = 0; 
+            for(i=0; i<Stafflist.length; i++) { 
+                if ( result.manager === Stafflist[0]) { 
+                    managerIndex = i;
+                }
+            }
+
+            let query = 'INSERT INTO employee SET ?';  
+            connection.query(query, 
+                { 
+                    first_name: result.first_name,
+                    last_name: result.last_name,
+                    rol_id: roleIndex,
+                    manager_id: managerIndex,
+                    manager: result.manager
+                },  
+                    (err, res) => { 
+                        if(err) throw err;
+                    }
+                ),
+                console.log(result.first_name,'',result.last_name,  'Your Inputs have been added to the list!'),
+                root()
+            }
+        ), 30}) 
      }
+
+     
