@@ -39,7 +39,7 @@ const getStaff = () => {
 
     } 
 
-    //gathers all roles for role array 
+                            //gathers all roles for role array 
 
     const getRole = () => {  
         RoleList.length = 0; 
@@ -62,7 +62,7 @@ const getStaff = () => {
           })
     }
 
-    //ading staff 
+                               //adding staff section\\\\\\\\\\\
 
     const addStaff = () => {
         getStaff()
@@ -120,7 +120,7 @@ const getStaff = () => {
         ), 30}) 
      }
 
-    //adds department
+                       //adds department section\\\\
 
     const addDepartment = () => { 
         inquirer.prompt ([ 
@@ -148,5 +148,66 @@ const getStaff = () => {
         )
     }
 
+
+                 ///add role section\\\\\\\
+
+    const addRole = () => { 
+        getDepartment()
+        setTimeout(function() { 
+         inquirer.Prompt ([ 
+          { 
+              name: 'title', 
+              message: 'Enter Role title:'
+          },{
+              name: 'department', 
+              message: "Choose department",
+              type:'list',
+              choices: DepList,
+          },
+          { 
+              name: 'salary',
+              message: 'Enter Salary for the role:'
+          }
+         ]).then((result) => { 
+
+            let depIndex = 0; 
+            for(i=0; i<DepList.length; i++) {
+                if (result.department === depList[0]) {
+                depIndex = null;
+                } else if (result.department === depList[i]) {
+                    depIndex = i;
+                }
+            }
+        let query = 'Insert INTO roles SET';  
+        connection.query(query, 
+            { 
+                title: result.title, 
+                salary:result.salary,
+                department_id:depIndex,
+            },
+            (err, res) => { 
+                if(err) throw err;
+            }
+            
+            
+            ), 
+            console.log(`New role "${results.title}" added!`), 
+            root()
+
+        } 
+            ), 30}); 
+
+    }   
+
     
- 
+    const seeAll = () => {
+        let query = `SELECT employees.id, employees.first_name, employees.last_name, roles.title, roles.salary, department.dep_name, employees.manager  `
+        query += `FROM employees `
+        query += `JOIN roles ON employees.role_id=roles.id `
+    
+    
+        query += `LEFT JOIN department ON department.id = roles.department_id; `
+
+        connection.query 
+
+    }
