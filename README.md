@@ -25,8 +25,8 @@ Employee Demonstration GIF:
 
 ![Sample of employee app running](https://github.com/anthony9292/employe-Hub/blob/main/employee.gif)
 
-Sample of Employee app running : 
-![Sample of Employee app]()
+Employee Pic: 
+![Sample of Employee app](https://github.com/anthony9292/employe-Hub/blob/main/screenshots/gitpash%20server.PNG)
 
 ## Youtube 
 
