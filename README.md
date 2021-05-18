@@ -23,7 +23,7 @@ MIT<br>[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](ht
 ## Images 
 Employee Demonstration GIF: 
 
-![Sample of employee app running]()
+![Sample of employee app running](https://github.com/anthony9292/employe-Hub/blob/main/employee.gif)
 
 Sample of Employee app running : 
 ![Sample of Employee app]()
