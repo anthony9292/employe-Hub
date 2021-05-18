@@ -38,13 +38,13 @@ const connection = mysql.createConnection({
               ],
              },
          ]).then((answer) => { 
-              if(answer.userSelectedChoice === "Explore Application") { 
+              if(answer.startOptions === "Explore Application") { 
                   viewApp();
-              } else if (answer.userSelectedChoice === "Add to Application") { 
+              } else if (answer.startOptions === "Add to Application") { 
                   addToApp(); 
-              } else if(answer.userSelectedChoice === "Update Application") { 
+              } else if(answer.startOptions === "Update Application") { 
                   updateApp();
-              } else if(answer.userSelectedChoice === "Exit Application") { 
+              } else if(answer.startOptions === "Exit Application") { 
                   exitApp();
               }
           });
