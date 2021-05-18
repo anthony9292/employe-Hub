@@ -7,8 +7,8 @@ const connection = mysql.createConnection({
   host: "localhost", //input your own if not localhost
   port: 3306, //input your port if not 3306
   user: "root", //input ur username if not root
-  password: "Thendgino9292", //input your own sql password
-  database: "employee_db", //gets database
+  password: "", //input your own sql password
+  database: "employee_db", //gets database 
 });
 ///start up options
 function initiate() {
@@ -73,7 +73,7 @@ function viewApp() {
       }
     });
 }
-
+///add selection section
 function addToApp() {
   inquirer
     .prompt([

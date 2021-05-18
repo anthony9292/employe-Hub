@@ -4,17 +4,15 @@ MIT<br>[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](ht
 ## Description
   Employee tracker is a CMS(Content Management System) application that allows the user toi view and modify employee data for a organization. 
   This App permits the user to  create, modify employee information within the company/organization. When starting the application the user is 
-  asked questions threw the command line, and buy filling those out, the user is able to add new departments, roles, and employees, 
-  
-  
-  
-  
+  asked questions threw the command line, and buy filling those out, the user is able to add new departments, roles, and employees, also the user is 
+  able to explore departments, roles and employees. In addition the user is able to update certain sections of a employee's role within the organization. for example his role within the company, what department the employee works in and what his salary looks like. 
   ## Table of contents
   - [Description](#description)
   - [Table of contents](#table-of-contents)
   - [Installation](#installation)
   - [Images](#images)
   - [Youtube](#youtube)
+  - [Technologies](#technologies)
   - [License](#license)
   - [Contributing](#contributing)
   - [Questions](#questions)
@@ -32,6 +30,11 @@ Sample of Employee app running :
 
 ## Youtube 
 
+# Technologies 
+- Node.js
+- Express.js
+- Inquirer
+- MySql
 
 ## License MIT
 I have used a mit License for this application, please see repository for documentation <https://github.com/anthony9292/Team-Generator-/blob/main/License.md>
