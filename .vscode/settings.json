@@ -3,6 +3,10 @@
         "Quary",
         "firstname",
         "lastname",
+        "lstname",
+        "mngid",
+        "mngname",
+        "rlid",
         "tasklist",
         "unsigned"
     ]
