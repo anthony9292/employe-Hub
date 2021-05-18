@@ -1,25 +1,25 @@
-// Connection to the DB
+// Connection to DB
 const mysql = require("mysql");
 const cTable = require("console.table");
 const inquirer = require("inquirer");
 
 const connection = mysql.createConnection({
-  host: "localhost",//input your own if not localhost
-  port: 3306,//input your port if not 3306
-  user: "root", //input ur username if not root 
-  password: "Thendgino9292",//input your own sql password
+  host: "localhost", //input your own if not localhost
+  port: 3306, //input your port if not 3306
+  user: "root", //input ur username if not root
+  password: "Thendgino9292", //input your own sql password
   database: "employee_db", //gets database
 });
 ///start up options
 function initiate() {
   inquirer
     .prompt([
-      {
+      {                        
         name: "startOptions",
         type: "list",
         message: "Choose an Option from the list below.",
         choices: [
-          "Explore Application",
+          "Explore Application",   
           "Add to Application",
           "Update Application",
           "Exit Application",
@@ -39,7 +39,7 @@ function initiate() {
     });
 }
 
-///view all section 
+///view all section
 
 function viewApp() {
   inquirer
@@ -48,7 +48,7 @@ function viewApp() {
         name: "exploreEntry",
         type: "list",
         message: "Please select a section you would like to Explore",
-        choices: ["Roles","Employees", "Departments"],
+        choices: ["Roles", "Employees", "Departments"],
       },
     ])
     .then((answer) => {
@@ -102,7 +102,7 @@ function addToApp() {
             name: title,
             salary: salary,
           }));
-    
+
           addRole(departmentChoices);
         });
       }
@@ -132,6 +132,8 @@ function addToApp() {
       }
     });
 }
+
+///add department section 
 
 function addDepartment() {
   inquirer
@@ -182,7 +184,6 @@ function addRole(departmentChoices) {
       initiate();
     });
 }
-
 
 //// add employee section
 
@@ -257,6 +258,3 @@ function exitApp() {
 }
 
 initiate();
-
-     
-     
