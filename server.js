@@ -242,9 +242,9 @@ function updateApp() {
       } else if (answer.userUpdateEntry === "Drop a job role") {
         console.log("Test");
       } else if (answer.userUpdateEntry === "Drop an employee") {
-        console.log("No!");
+        console.log("No");
       } else if (answer.userUpdateEntry === "Update an employee's role") {
-        console.log("Yeah!");
+        console.log("Yes");
       } else if (answer.userUpdateEntry === "Return to Main menu") {
         initiate();
       }
