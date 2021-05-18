@@ -29,6 +29,7 @@ VALUES
 INSERT INTO roles (title, salary, department_id)
 VALUES 
 ("Laywer", 95000, 3), 
+
 ("Corporate counsel", 150000, 3);
 
 -- Marketing ROLES -------
