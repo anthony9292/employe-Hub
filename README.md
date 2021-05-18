@@ -17,24 +17,20 @@ MIT<br>[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](ht
   - [Youtube](#youtube)
   - [License](#license)
   - [Contributing](#contributing)
-  - [Tests](#tests)
-  - [Test GIF](#test-gif)
   - [Questions](#questions)
 
 ## Installation
  This application requires `npm i`, `npm i mysql`,`npm i inquirer`, and `npm i console.table`node packages installed first. then run the program buy execution of command `node server.js` to run the program.
 
 ## Images 
-Team Profile Demonstration GIF: 
+Employee Demonstration GIF: 
 
-![Team Profile Gif](https://github.com/anthony9292/Team-Generator-/blob/main/team-gif.gif)
+![Sample of employee app running]()
 
-Sample of generated Team pages : 
-![Sample of generated page](https://github.com/anthony9292/Team-Generator-/blob/main/assets/generatedpage.PNG)
+Sample of Employee app running : 
+![Sample of Employee app]()
 
 ## Youtube 
-
-  Link to team generator in action -->https://youtu.be/ZIHVTRq9M64
 
 
 ## License MIT
@@ -42,12 +38,6 @@ I have used a mit License for this application, please see repository for docume
 
 ## Contributing
    anthony9292
-
-## Tests
- The test Program was build by using class syntax and constructor functions. 
-
-## TEST GIF
-![Testing Gif](https://github.com/anthony9292/Team-Generator-/blob/main/test-gif.gif)
 
 ## Questions
 For questions regarding this application please contact me at:
